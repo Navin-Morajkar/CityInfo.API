@@ -16,7 +16,6 @@ namespace CityInfo.API.Controllers
         private readonly ICityInfoRepository _cityInfoRepository;
         private readonly IMapper _mapper;
 
-
         public PointOfInterestController(ILogger<PointOfInterestController> logger,
             IMailService mailService,
             ICityInfoRepository cityInfoRepository,
