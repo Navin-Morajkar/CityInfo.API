@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using CityInfo.API.Models;
 using CityInfo.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace CityInfo.API.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/cities")]
     public class CitiesController : ControllerBase
     {
@@ -34,7 +36,7 @@ namespace CityInfo.API.Controllers
             var (cityEntities, paginationMetadata) = await _cityInfoRepository.
                 GetCitiesAsync(name, searchQuery, pageNumber, pageSize);
 
-            Response.Headers.Add("X-Pagination", 
+            Response.Headers.Append("X-Pagination", 
                 JsonSerializer.Serialize(paginationMetadata));
 
             return Ok(_mapper.Map<IEnumerable<CityWithoutPointsOfInterestDto>>(cityEntities));
