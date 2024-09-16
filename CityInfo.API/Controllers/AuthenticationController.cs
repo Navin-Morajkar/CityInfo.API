@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static CityInfo.API.Controllers.AuthenticationController;
-using System.Security.Claims;
-using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace CityInfo.API.Controllers
 {
@@ -64,7 +63,7 @@ namespace CityInfo.API.Controllers
 
             // Step 2: create a token
             var securityKey = new SymmetricSecurityKey(
-                Convert.FromBase64String(_configuration["Authentication:SecretForKey"]));
+               Encoding.ASCII.GetBytes(_configuration["Authentication:SecretForKey"]));
             var signingCredentials = new SigningCredentials(
                 securityKey, SecurityAlgorithms.HmacSha256);
 
@@ -100,7 +99,5 @@ namespace CityInfo.API.Controllers
                 "Antwerp");
 
         }
-
-    }
-    
+    }    
 }
